@@ -5,7 +5,7 @@ import Grid from "./components/grid/grid";
 import { setFullGrid } from "./redux/actions/mainActions";
 import "./App.scss";
 
-const App = ({ generations, setFullGrid }) => {
+const App = ({ generations, setFullGrid, fullGrid }) => {
   const [speed, setSpeed] = useState(100);
   const [rows, setRows] = useState(30);
   const [cols, setCols] = useState(50);
@@ -17,13 +17,14 @@ const App = ({ generations, setFullGrid }) => {
     <div className="">
       <h1>Game of Life</h1>
       <h2>Generations: {generations} </h2>
-      <Grid />
+      <Grid cols={cols} rows={rows} fullGrid={fullGrid} selectBox={selectBox} />
     </div>
   );
 };
 
 const mapState = (state) => ({
   generations: state.main.generations,
+  fullGrid: state.main.fullGrid,
 });
 const actions = {
   setFullGrid,
