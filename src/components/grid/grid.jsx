@@ -6,7 +6,6 @@ import Box from "../boxes/boxes";
 const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
   const [rowsArr, setRowsArr] = useState([]);
   const width = cols * 14;
-  // let rowsArr = [];
   useEffect(() => {
     let newArr = [];
     for (let i = 0; i < rows; i++) {

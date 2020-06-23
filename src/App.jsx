@@ -10,13 +10,8 @@ const App = ({ generations, setFullGrid, fullGrid, updateGrid, seedGrid }) => {
   const [rows, setRows] = useState(30);
   const [cols, setCols] = useState(30);
 
-  const [fg, setFg] = useState([]);
-
   useEffect(() => {
-    setFullGrid(rows, cols).then((res) => {
-      // console.log(res);
-      setFg(fullGrid);
-    });
+    setFullGrid(rows, cols);
   }, []);
 
   return (
