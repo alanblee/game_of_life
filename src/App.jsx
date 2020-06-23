@@ -13,11 +13,19 @@ const App = ({ generations, setFullGrid, fullGrid }) => {
   useEffect(() => {
     setFullGrid(rows, cols);
   }, []);
+  const selectBox = () => {};
   return (
     <div className="">
       <h1>Game of Life</h1>
       <h2>Generations: {generations} </h2>
-      <Grid cols={cols} rows={rows} fullGrid={fullGrid} selectBox={selectBox} />
+      {fullGrid.length > 0 ? (
+        <Grid
+          cols={cols}
+          rows={rows}
+          fullGrid={fullGrid}
+          selectBox={selectBox}
+        />
+      ) : null}
     </div>
   );
 };

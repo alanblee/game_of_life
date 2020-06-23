@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Box from "../boxes/boxes";
 
 const Grid = ({ rows, cols, fullGrid, selectBox }) => {
   const width = cols * 14;
@@ -21,7 +22,11 @@ const Grid = ({ rows, cols, fullGrid, selectBox }) => {
       );
     }
   }
-  return <div className="grid" style={{ width: width }}></div>;
+  return (
+    <div className="grid" style={{ width: width }}>
+      {rowsArr}
+    </div>
+  );
 };
 
 export default compose(connect(null, null))(Grid);
