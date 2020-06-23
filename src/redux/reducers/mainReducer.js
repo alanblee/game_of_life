@@ -3,7 +3,8 @@ import {
   GET_GENERATIONS,
   SET_FULL_GRID,
   UPDATE_FULL_GRID,
-  CLICKED,
+  RELOAD_GRID,
+  SEED_GRID,
 } from "../types/mainTypes";
 
 const initialState = {
@@ -46,9 +47,17 @@ const updateGrid = (state = initialState, payload) => {
     };
   }
 };
+
+const seedGrid = (state = initialState, payload) => {
+  return {
+    ...state,
+    fullGrid: payload,
+  };
+};
 export default createReducer(initialState, {
   [GET_GENERATIONS]: getGen,
   [SET_FULL_GRID]: setGrid,
   [UPDATE_FULL_GRID]: updateGrid,
-  [CLICKED]: getGrid,
+  [RELOAD_GRID]: getGrid,
+  [SEED_GRID]: seedGrid,
 });
