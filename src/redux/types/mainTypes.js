@@ -1,1 +1,2 @@
 export const GET_GENERATIONS = "GET_GENERATIONS";
+export const SET_FULL_GRID = "SET_FULL_GRID";
