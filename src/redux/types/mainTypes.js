@@ -1,0 +1,1 @@
+export const GET_GENERATIONS = "GET_GENERATIONS";
