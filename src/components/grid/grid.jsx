@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 const Grid = () => {
-  return <h1>Grid</h1>;
+  return <div className="grid"></div>;
 };
 
 export default compose(connect(null, null))(Grid);
