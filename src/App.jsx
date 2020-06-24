@@ -20,10 +20,10 @@ const App = ({
   clicked,
 }) => {
   const [speed, setSpeed] = useState(100);
-  const [rows, setRows] = useState(10);
-  const [cols, setCols] = useState(10);
-  const [intervalId, setIntervalId] = useState("");
-  const [gridArr, setGridArr] = useState([]);
+  const [rows, setRows] = useState(30);
+  const [cols, setCols] = useState(30);
+  // const [intervalId, setIntervalId] = useState("");
+  // const [gridArr, setGridArr] = useState([]);
 
   useEffect(() => {
     setFullGrid(rows, cols);
@@ -37,7 +37,7 @@ const App = ({
     nextStep(gridArr, rows, cols);
   };
   const pause = () => {
-    clearInterval(intervalId);
+    // clearInterval(intervalId);
   };
   return (
     <div className="">
