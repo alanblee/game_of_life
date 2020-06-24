@@ -3,6 +3,7 @@ import {
   UPDATE_FULL_GRID,
   RELOAD_GRID,
   SEED_GRID,
+  START_GAME,
 } from "../types/mainTypes";
 
 export const setFullGrid = (rows, cols) => async (dispatch) => {
@@ -42,4 +43,33 @@ export const seedGrid = (rows, cols) => async (dispatch) => {
   } catch (err) {
     console.log(err.message);
   }
+};
+
+export const nextStep = (gridArr, rows, cols) => async (dispatch) => {
+  try {
+    let copyGrid = arrayClone(gridArr);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        let count = 0;
+        if (i > 0) if (gridArr[i - 1][j]) count++;
+        if (i > 0 && j > 0) if (gridArr[i - 1][j - 1]) count++;
+        if (i > 0 && j < cols - 1) if (gridArr[i - 1][j + 1]) count++;
+        if (j < cols - 1) if (gridArr[i][j + 1]) count++;
+        if (j > 0) if (gridArr[i][j - 1]) count++;
+        if (i < rows - 1) if (gridArr[i + 1][j]) count++;
+        if (i < rows - 1 && j > 0) if (gridArr[i + 1][j - 1]) count++;
+        if (i < rows - 1 && j < cols - 1) if (gridArr[i + 1][j + 1]) count++;
+        if (gridArr[i][j] && (count < 2 || count > 3)) copyGrid[i][j] = false;
+        if (!gridArr[i][j] && count === 3) copyGrid[i][j] = true;
+      }
+    }
+    await dispatch({ type: START_GAME, payload: copyGrid });
+    dispatch({ type: RELOAD_GRID, payload: null });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const arrayClone = (arr) => {
+  return JSON.parse(JSON.stringify(arr));
 };

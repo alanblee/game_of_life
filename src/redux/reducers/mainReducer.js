@@ -5,6 +5,7 @@ import {
   UPDATE_FULL_GRID,
   RELOAD_GRID,
   SEED_GRID,
+  START_GAME,
 } from "../types/mainTypes";
 
 const initialState = {
@@ -52,6 +53,16 @@ const seedGrid = (state = initialState, payload) => {
   return {
     ...state,
     fullGrid: payload,
+    clicked: true,
+  };
+};
+
+const nextStep = (state = initialState, payload) => {
+  return {
+    ...state,
+    fullGrid: payload,
+    generations: (state.generations += 1),
+    clicked: true,
   };
 };
 export default createReducer(initialState, {
@@ -60,4 +71,5 @@ export default createReducer(initialState, {
   [UPDATE_FULL_GRID]: updateGrid,
   [RELOAD_GRID]: getGrid,
   [SEED_GRID]: seedGrid,
+  [START_GAME]: nextStep,
 });
