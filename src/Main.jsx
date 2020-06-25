@@ -8,11 +8,11 @@ const Main = () => {
   return (
     <div>
       <Navbar />
+      <Route exact path="/">
+        <About />
+      </Route>
       <Route exact path="/game">
         <Game />
-      </Route>
-      <Route exact path="/about">
-        <About />
       </Route>
     </div>
   );
