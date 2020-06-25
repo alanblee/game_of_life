@@ -1,6 +1,5 @@
 import { createReducer } from "./reducerUtil";
 import {
-  GET_GENERATIONS,
   SET_FULL_GRID,
   UPDATE_FULL_GRID,
   RELOAD_GRID,
@@ -9,6 +8,8 @@ import {
   PAUSE_GAME,
   SET_LINE,
   CLEAR_GRID,
+  RESIZE_GRID,
+  RESIZED_START,
 } from "../types/mainTypes";
 
 const initialState = {
@@ -17,12 +18,7 @@ const initialState = {
   clicked: false,
   newGame: true,
   gameStarted: false,
-};
-
-const getGen = (state = initialState, payload) => {
-  return {
-    ...state,
-  };
+  resized: true,
 };
 
 const setGrid = (state = initialState, payload) => {
@@ -31,10 +27,25 @@ const setGrid = (state = initialState, payload) => {
       ...state,
       fullGrid: payload,
       newGame: false,
+      clicked: true,
     };
   }
 };
-
+const resizeGrid = (state = initialState, payload) => {
+  if (payload) {
+    return {
+      ...state,
+      fullGrid: payload,
+      resized: false,
+    };
+  }
+};
+const resized = (state = initialState, payload) => {
+  return {
+    ...state,
+    resized: !state.resized,
+  };
+};
 const getGrid = (state = initialState, payload) => {
   return { ...state, clicked: !state.clicked, gameStarted: false };
 };
@@ -74,7 +85,7 @@ const setLine = (state = initialState, payload) => {
 const playGame = (state = initialState, payload) => {
   return {
     ...state,
-    fullGrid: [...payload],
+    fullGrid: payload,
     generations: (state.generations += 1),
     clicked: true,
     gameStarted: !state.gameStarted,
@@ -97,7 +108,6 @@ const clearGrid = (state = initialState, payload) => {
   };
 };
 export default createReducer(initialState, {
-  [GET_GENERATIONS]: getGen,
   [SET_FULL_GRID]: setGrid,
   [UPDATE_FULL_GRID]: updateGrid,
   [RELOAD_GRID]: getGrid,
@@ -106,4 +116,6 @@ export default createReducer(initialState, {
   [PAUSE_GAME]: pauseGame,
   [CLEAR_GRID]: clearGrid,
   [SET_LINE]: setLine,
+  [RESIZE_GRID]: resizeGrid,
+  [RESIZED_START]: resized,
 });

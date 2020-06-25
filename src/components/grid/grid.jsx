@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Box from "../boxes/boxes";
 
-const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
+const Grid = ({ rows, cols, fullGrid, selectBox, clicked, gameStarted }) => {
   const [rowsArr, setRowsArr] = useState(fullGrid);
   const width = cols * 14;
 
@@ -26,7 +26,7 @@ const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
       }
     }
     setRowsArr(newArr);
-  }, [clicked]);
+  }, [clicked, gameStarted]);
 
   return (
     <div className="grid" style={{ width: width }}>
@@ -37,5 +37,6 @@ const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
 const mapState = (state) => ({
   fullGrid: state.main.fullGrid,
   clicked: state.main.clicked,
+  gameStarted: state.main.gameStarted,
 });
 export default compose(connect(mapState, null))(Grid);

@@ -10,6 +10,7 @@ import {
   pauseGame,
   setLine,
   clearGrid,
+  resizeGrid,
 } from "./redux/actions/mainActions";
 import "./App.scss";
 
@@ -26,10 +27,12 @@ const App = ({
   setLine,
   gameStarted,
   clearGrid,
+  resized,
+  resizeGrid,
 }) => {
   const [speed, setSpeed] = useState(1000);
-  const [rows, setRows] = useState(20);
-  const [cols, setCols] = useState(20);
+  const [rows, setRows] = useState(35);
+  const [cols, setCols] = useState(35);
   const [grid, setGrid] = useState(fullGrid);
   const [intervalId, setIntervalId] = useState("");
 
@@ -52,6 +55,13 @@ const App = ({
   const play = (grid, row, col) => {
     return nextStep(grid, row, col);
   };
+  useEffect(() => {
+    if (resized) {
+      setRows(rows);
+      setCols(cols);
+      resizeGrid(rows, cols);
+    }
+  }, [resized]);
 
   const startGame = (arr, row, col) => {
     setIntervalId(
@@ -67,6 +77,19 @@ const App = ({
   const clear = () => {
     clearGrid();
   };
+
+  const smallGrid = () => {
+    setRows(10);
+    setCols(10);
+  };
+  const mediumGrid = () => {
+    setRows(25);
+    setCols(25);
+  };
+  const largeGrid = () => {
+    setRows(30);
+    setCols(30);
+  };
   return (
     <div className="">
       <h1>Game of Life</h1>
@@ -75,6 +98,9 @@ const App = ({
       <button onClick={() => setLine(rows, cols)}>Middle Line</button>
       <button onClick={() => pause()}>Pause</button>
       <button onClick={() => clear()}> Clear</button>
+      <button onClick={() => smallGrid()}>Small</button>
+      <button onClick={() => mediumGrid()}>Medium</button>
+      <button onClick={() => largeGrid()}>Large</button>
       {grid.length > 0 ? (
         <button onClick={() => play(grid, rows, cols)}>Resume</button>
       ) : null}
@@ -84,6 +110,7 @@ const App = ({
               key={1}
               cols={cols}
               rows={rows}
+              grid={fullGrid}
               selectBox={(row, col) => {
                 updateGrid(row, col);
               }}
@@ -100,6 +127,7 @@ const mapState = (state) => ({
   clicked: state.main.clicked,
   newGame: state.main.newGame,
   gameStarted: state.main.gameStarted,
+  resized: state.main.resized,
 });
 const actions = {
   setFullGrid,
@@ -109,5 +137,6 @@ const actions = {
   pauseGame,
   setLine,
   clearGrid,
+  resizeGrid,
 };
 export default compose(connect(mapState, actions))(App);

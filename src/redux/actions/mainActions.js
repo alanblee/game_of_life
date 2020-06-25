@@ -7,6 +7,8 @@ import {
   PAUSE_GAME,
   SET_LINE,
   CLEAR_GRID,
+  RESIZE_GRID,
+  RESIZED_START,
 } from "../types/mainTypes";
 
 export const setFullGrid = (rows, cols) => async (dispatch) => {
@@ -21,6 +23,17 @@ export const setFullGrid = (rows, cols) => async (dispatch) => {
   }
 };
 
+export const resizeGrid = (rows, cols) => async (dispatch) => {
+  try {
+    const fullGrid = Array(rows)
+      .fill()
+      .map(() => Array(cols).fill(false));
+    await dispatch({ type: RESIZED_START, payload: null });
+    await dispatch({ type: RESIZE_GRID, payload: fullGrid });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 export const updateGrid = (row, col) => async (dispatch) => {
   try {
     await dispatch({ type: UPDATE_FULL_GRID, payload: { row, col } });
