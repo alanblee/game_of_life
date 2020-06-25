@@ -6,3 +6,4 @@ export const SEED_GRID = "SEED_GRID";
 export const PLAY_GAME = "PLAY_GAME";
 export const PAUSE_GAME = "PAUSE_GAME";
 export const SET_LINE = "SET_LINE";
+export const CLEAR_GRID = "CLEAR_GRID";

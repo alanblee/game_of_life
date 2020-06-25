@@ -6,6 +6,7 @@ import {
   PLAY_GAME,
   PAUSE_GAME,
   SET_LINE,
+  CLEAR_GRID,
 } from "../types/mainTypes";
 
 export const setFullGrid = (rows, cols) => async (dispatch) => {
@@ -14,7 +15,7 @@ export const setFullGrid = (rows, cols) => async (dispatch) => {
       .fill()
       .map(() => Array(cols).fill(false));
     await dispatch({ type: SET_FULL_GRID, payload: fullGrid });
-    return fullGrid;
+    await dispatch({ type: RELOAD_GRID, payload: null });
   } catch (err) {
     console.log(err.message);
   }
@@ -24,7 +25,6 @@ export const updateGrid = (row, col) => async (dispatch) => {
   try {
     await dispatch({ type: UPDATE_FULL_GRID, payload: { row, col } });
     dispatch({ type: PAUSE_GAME, payload: null });
-    // await dispatch({ type: RELOAD_GRID, payload: null });
   } catch (err) {
     console.log(err.message);
   }
@@ -100,6 +100,13 @@ export const pauseGame = () => async (dispatch) => {
   }
 };
 
+export const clearGrid = () => async (dispatch) => {
+  try {
+    dispatch({ type: CLEAR_GRID, payload: null });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 const arrayClone = (arr) => {
   return JSON.parse(JSON.stringify(arr));
 };

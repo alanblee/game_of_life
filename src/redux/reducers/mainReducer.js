@@ -8,6 +8,7 @@ import {
   PLAY_GAME,
   PAUSE_GAME,
   SET_LINE,
+  CLEAR_GRID,
 } from "../types/mainTypes";
 
 const initialState = {
@@ -87,6 +88,14 @@ const pauseGame = (state = initialState, payload) => {
     gameStarted: false,
   };
 };
+const clearGrid = (state = initialState, payload) => {
+  return {
+    ...state,
+    newGame: true,
+    clicked: true,
+    generations: 0,
+  };
+};
 export default createReducer(initialState, {
   [GET_GENERATIONS]: getGen,
   [SET_FULL_GRID]: setGrid,
@@ -95,5 +104,6 @@ export default createReducer(initialState, {
   [SEED_GRID]: seedGrid,
   [PLAY_GAME]: playGame,
   [PAUSE_GAME]: pauseGame,
+  [CLEAR_GRID]: clearGrid,
   [SET_LINE]: setLine,
 });

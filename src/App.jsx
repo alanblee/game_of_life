@@ -9,6 +9,7 @@ import {
   nextStep,
   pauseGame,
   setLine,
+  clearGrid,
 } from "./redux/actions/mainActions";
 import "./App.scss";
 
@@ -24,6 +25,7 @@ const App = ({
   pauseGame,
   setLine,
   gameStarted,
+  clearGrid,
 }) => {
   const [speed, setSpeed] = useState(1000);
   const [rows, setRows] = useState(20);
@@ -34,11 +36,10 @@ const App = ({
   useEffect(() => {
     if (newGame) {
       setFullGrid(rows, cols);
+      setGrid(fullGrid);
     }
     if (clicked) {
       setGrid(fullGrid);
-      // startGame(fullGrid, rows, cols);
-      // return () => clearInterval(intervalId);
     }
   }, [clicked]);
 
@@ -63,7 +64,9 @@ const App = ({
     clearInterval(intervalId);
     pauseGame();
   };
-
+  const clear = () => {
+    clearGrid();
+  };
   return (
     <div className="">
       <h1>Game of Life</h1>
@@ -71,6 +74,7 @@ const App = ({
       <button onClick={() => seedGrid(rows, cols)}>Random</button>
       <button onClick={() => setLine(rows, cols)}>Middle Line</button>
       <button onClick={() => pause()}>Pause</button>
+      <button onClick={() => clear()}> Clear</button>
       {grid.length > 0 ? (
         <button onClick={() => play(grid, rows, cols)}>Resume</button>
       ) : null}
@@ -80,7 +84,6 @@ const App = ({
               key={1}
               cols={cols}
               rows={rows}
-              grid={fullGrid}
               selectBox={(row, col) => {
                 updateGrid(row, col);
               }}
@@ -105,5 +108,6 @@ const actions = {
   nextStep,
   pauseGame,
   setLine,
+  clearGrid,
 };
 export default compose(connect(mapState, actions))(App);

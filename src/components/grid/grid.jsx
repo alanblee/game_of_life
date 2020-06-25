@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Box from "../boxes/boxes";
 
-const Grid = ({ rows, cols, fullGrid, selectBox, clicked, updateBox }) => {
+const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
   const [rowsArr, setRowsArr] = useState(fullGrid);
   const width = cols * 14;
+
   useEffect(() => {
     let newArr = [];
     for (let i = 0; i < rows; i++) {
@@ -20,7 +21,6 @@ const Grid = ({ rows, cols, fullGrid, selectBox, clicked, updateBox }) => {
             row={i}
             col={j}
             selectBox={selectBox}
-            updateBox={updateBox}
           />
         );
       }
