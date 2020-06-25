@@ -98,11 +98,10 @@ const Game = ({
   };
   return (
     <div className="game-container">
-      <h2>Generations: {generations} </h2>
       <div className="control-pannel">
         <div className="game-control">
           {grid.length > 0 ? (
-            <button onClick={() => play(grid, rows, cols)}>Resume</button>
+            <button onClick={() => play(grid, rows, cols)}>Play</button>
           ) : null}
           <button onClick={() => pause()}>Pause</button>
           <button onClick={() => clear()}> Clear</button>
@@ -122,6 +121,7 @@ const Game = ({
           <button onClick={() => largeGrid()}>Large</button>
         </div>
       </div>
+      <h2>Generations: {generations} </h2>
       <div className="grid">
         {fullGrid.length > 0
           ? [

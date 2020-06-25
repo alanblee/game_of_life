@@ -4,21 +4,21 @@
   align-items: center;
   flex-direction: column-reverse;
   button {
-    // background-color: transparent;
     width: 20%;
-    padding: 3%;
+    padding: 1%;
     border: none;
     cursor: pointer;
-    margin: 1rem 0rem;
+    margin: 0.5rem 0.1rem;
   }
 
   .control-pannel {
+    margin-top: 1rem;
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 35%;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     .game-control,
     .speed-controls,
     .preset-patterns,
