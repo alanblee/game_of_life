@@ -1,20 +1,22 @@
 .box {
   display: inline-block;
-  border: 0.1rem solid black;
+  // border: 0.1rem solid black;
   border-radius: 2rem;
   width: 1.5rem;
   height: 1.5rem;
   margin-left: -0.1rem;
   margin-bottom: -0.1rem;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 
 .off {
   background-color: lightgray;
+  transform: scale(0.9);
 }
 
 .on {
   background-color: #63fffc;
+  transform: scale(1);
 }
 
 .box:hover {

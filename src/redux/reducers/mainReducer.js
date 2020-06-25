@@ -5,13 +5,15 @@ import {
   UPDATE_FULL_GRID,
   RELOAD_GRID,
   SEED_GRID,
-  START_GAME,
+  PLAY_GAME,
+  PAUSE_GAME,
 } from "../types/mainTypes";
 
 const initialState = {
   generations: 0,
   fullGrid: [],
   clicked: false,
+  newGame: true,
 };
 
 const getGen = (state = initialState, payload) => {
@@ -25,6 +27,7 @@ const setGrid = (state = initialState, payload) => {
     return {
       ...state,
       fullGrid: payload,
+      newGame: false,
     };
   }
 };
@@ -44,7 +47,7 @@ const updateGrid = (state = initialState, payload) => {
     return {
       ...state,
       fullGrid: state.fullGrid,
-      clicked: true,
+      clicked: false,
     };
   }
 };
@@ -57,12 +60,19 @@ const seedGrid = (state = initialState, payload) => {
   };
 };
 
-const nextStep = (state = initialState, payload) => {
+const playGame = (state = initialState, payload) => {
   return {
     ...state,
-    fullGrid: payload,
+    fullGrid: [...payload],
     generations: (state.generations += 1),
     clicked: true,
+  };
+};
+
+const pauseGame = (state = initialState, payload) => {
+  return {
+    ...state,
+    clicked: false,
   };
 };
 export default createReducer(initialState, {
@@ -71,5 +81,6 @@ export default createReducer(initialState, {
   [UPDATE_FULL_GRID]: updateGrid,
   [RELOAD_GRID]: getGrid,
   [SEED_GRID]: seedGrid,
-  [START_GAME]: nextStep,
+  [PLAY_GAME]: playGame,
+  [PAUSE_GAME]: pauseGame,
 });

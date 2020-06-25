@@ -3,7 +3,8 @@ import {
   UPDATE_FULL_GRID,
   RELOAD_GRID,
   SEED_GRID,
-  START_GAME,
+  PLAY_GAME,
+  PAUSE_GAME,
 } from "../types/mainTypes";
 
 export const setFullGrid = (rows, cols) => async (dispatch) => {
@@ -11,7 +12,8 @@ export const setFullGrid = (rows, cols) => async (dispatch) => {
     const fullGrid = Array(rows)
       .fill()
       .map(() => Array(cols).fill(false));
-    dispatch({ type: SET_FULL_GRID, payload: fullGrid });
+    await dispatch({ type: SET_FULL_GRID, payload: fullGrid });
+    return fullGrid;
   } catch (err) {
     console.log(err.message);
   }
@@ -63,8 +65,16 @@ export const nextStep = (gridArr, rows, cols) => async (dispatch) => {
         if (!gridArr[i][j] && count === 3) copyGrid[i][j] = true;
       }
     }
-    await dispatch({ type: START_GAME, payload: copyGrid });
-    dispatch({ type: RELOAD_GRID, payload: null });
+    await dispatch({ type: PLAY_GAME, payload: copyGrid });
+    await dispatch({ type: RELOAD_GRID, payload: null });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const pauseGame = () => async (dispatch) => {
+  try {
+    dispatch({ type: PAUSE_GAME, payload: null });
   } catch (err) {
     console.log(err.message);
   }
