@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Box from "../boxes/boxes";
 
-const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
+const Grid = ({ rows, cols, fullGrid, selectBox, clicked, updateBox }) => {
   const [rowsArr, setRowsArr] = useState(fullGrid);
   const width = cols * 14;
   useEffect(() => {
@@ -20,6 +20,7 @@ const Grid = ({ rows, cols, fullGrid, selectBox, clicked }) => {
             row={i}
             col={j}
             selectBox={selectBox}
+            updateBox={updateBox}
           />
         );
       }

@@ -8,6 +8,7 @@ import {
   seedGrid,
   nextStep,
   pauseGame,
+  setLine,
 } from "./redux/actions/mainActions";
 import "./App.scss";
 
@@ -21,10 +22,12 @@ const App = ({
   clicked,
   newGame,
   pauseGame,
+  setLine,
+  gameStarted,
 }) => {
-  const [speed, setSpeed] = useState(10);
-  const [rows, setRows] = useState(30);
-  const [cols, setCols] = useState(30);
+  const [speed, setSpeed] = useState(1000);
+  const [rows, setRows] = useState(20);
+  const [cols, setCols] = useState(20);
   const [grid, setGrid] = useState(fullGrid);
   const [intervalId, setIntervalId] = useState("");
 
@@ -34,11 +37,17 @@ const App = ({
     }
     if (clicked) {
       setGrid(fullGrid);
-      startGame(fullGrid, rows, cols);
-      return () => clearInterval(intervalId);
+      // startGame(fullGrid, rows, cols);
+      // return () => clearInterval(intervalId);
     }
   }, [clicked]);
 
+  useEffect(() => {
+    if (gameStarted) {
+      startGame(fullGrid, rows, cols);
+      return () => clearInterval(intervalId);
+    }
+  }, [gameStarted]);
   const play = (grid, row, col) => {
     return nextStep(grid, row, col);
   };
@@ -54,17 +63,17 @@ const App = ({
     clearInterval(intervalId);
     pauseGame();
   };
+
   return (
     <div className="">
       <h1>Game of Life</h1>
       <h2>Generations: {generations} </h2>
-      <button onClick={() => seedGrid(rows, cols)}>Seed Grid</button>
-      {/* <button onClick={() => play(grid, rows, cols)}>Play</button> */}
+      <button onClick={() => seedGrid(rows, cols)}>Random</button>
+      <button onClick={() => setLine(rows, cols)}>Middle Line</button>
       <button onClick={() => pause()}>Pause</button>
       {grid.length > 0 ? (
-        <button onClick={() => play(grid, rows, cols)}>Play</button>
+        <button onClick={() => play(grid, rows, cols)}>Resume</button>
       ) : null}
-
       {fullGrid.length > 0
         ? [
             <Grid
@@ -87,6 +96,7 @@ const mapState = (state) => ({
   fullGrid: state.main.fullGrid,
   clicked: state.main.clicked,
   newGame: state.main.newGame,
+  gameStarted: state.main.gameStarted,
 });
 const actions = {
   setFullGrid,
@@ -94,5 +104,6 @@ const actions = {
   seedGrid,
   nextStep,
   pauseGame,
+  setLine,
 };
 export default compose(connect(mapState, actions))(App);

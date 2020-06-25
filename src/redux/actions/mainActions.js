@@ -5,6 +5,7 @@ import {
   SEED_GRID,
   PLAY_GAME,
   PAUSE_GAME,
+  SET_LINE,
 } from "../types/mainTypes";
 
 export const setFullGrid = (rows, cols) => async (dispatch) => {
@@ -22,7 +23,8 @@ export const setFullGrid = (rows, cols) => async (dispatch) => {
 export const updateGrid = (row, col) => async (dispatch) => {
   try {
     await dispatch({ type: UPDATE_FULL_GRID, payload: { row, col } });
-    await dispatch({ type: RELOAD_GRID, payload: null });
+    dispatch({ type: PAUSE_GAME, payload: null });
+    // await dispatch({ type: RELOAD_GRID, payload: null });
   } catch (err) {
     console.log(err.message);
   }
@@ -41,6 +43,24 @@ export const seedGrid = (rows, cols) => async (dispatch) => {
       }
     }
     await dispatch({ type: SEED_GRID, payload: seedGrid });
+    await dispatch({ type: RELOAD_GRID, payload: null });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const setLine = (rows, cols) => async (dispatch) => {
+  try {
+    const mid = Math.floor(rows / 2);
+    const lineGrid = Array(rows)
+      .fill()
+      .map(() => Array(cols).fill(false));
+    for (let i = mid; i < mid + 1; i++) {
+      for (let j = 0; j < cols; j++) {
+        lineGrid[i][j] = true;
+      }
+    }
+    await dispatch({ type: SET_LINE, payload: lineGrid });
     await dispatch({ type: RELOAD_GRID, payload: null });
   } catch (err) {
     console.log(err.message);

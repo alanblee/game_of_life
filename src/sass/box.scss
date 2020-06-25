@@ -1,6 +1,6 @@
 .box {
   display: inline-block;
-  // border: 0.1rem solid black;
+  border: 0.1rem dotted black;
   border-radius: 2rem;
   width: 1.5rem;
   height: 1.5rem;
@@ -10,7 +10,7 @@
 }
 
 .off {
-  background-color: lightgray;
+  background-color: transparent;
   transform: scale(0.9);
 }
 
