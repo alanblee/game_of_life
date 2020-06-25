@@ -31,8 +31,8 @@ const App = ({
   resizeGrid,
 }) => {
   const [speed, setSpeed] = useState(1000);
-  const [rows, setRows] = useState(35);
-  const [cols, setCols] = useState(35);
+  const [rows, setRows] = useState(30);
+  const [cols, setCols] = useState(30);
   const [grid, setGrid] = useState(fullGrid);
   const [intervalId, setIntervalId] = useState("");
 
@@ -90,6 +90,13 @@ const App = ({
     setRows(30);
     setCols(30);
   };
+
+  const speedFast = () => {
+    setSpeed(100);
+  };
+  const speedSlow = () => {
+    setSpeed(1000);
+  };
   return (
     <div className="">
       <h1>Game of Life</h1>
@@ -101,6 +108,8 @@ const App = ({
       <button onClick={() => smallGrid()}>Small</button>
       <button onClick={() => mediumGrid()}>Medium</button>
       <button onClick={() => largeGrid()}>Large</button>
+      <button onClick={() => speedFast()}>Fast</button>
+      <button onClick={() => speedSlow()}>Slow</button>
       {grid.length > 0 ? (
         <button onClick={() => play(grid, rows, cols)}>Resume</button>
       ) : null}
