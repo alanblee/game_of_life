@@ -1,6 +1,6 @@
 .box {
   display: inline-block;
-  border: 0.1rem dotted black;
+  border: 0.1rem dashed rgba(0, 0, 0, 0.3);
   border-radius: 2rem;
   width: 1.5rem;
   height: 1.5rem;
@@ -11,16 +11,17 @@
 
 .off {
   background-color: transparent;
+
   transform: scale(0.9);
 }
 
 .on {
-  background-color: #63fffc;
+  background-color: #ff636e;
   transform: scale(1);
 }
 
 .box:hover {
-  background: #00ccff;
+  background: #ff636e;
 }
 
 .center {

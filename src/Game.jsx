@@ -12,9 +12,8 @@ import {
   clearGrid,
   resizeGrid,
 } from "./redux/actions/mainActions";
-import "./App.scss";
 
-const App = ({
+const Game = ({
   generations,
   setFullGrid,
   fullGrid,
@@ -148,4 +147,4 @@ const actions = {
   clearGrid,
   resizeGrid,
 };
-export default compose(connect(mapState, actions))(App);
+export default compose(connect(mapState, actions))(Game);
