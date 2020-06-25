@@ -97,34 +97,46 @@ const Game = ({
     setSpeed(1000);
   };
   return (
-    <div className="">
-      <h1>Game of Life</h1>
+    <div className="game-container">
       <h2>Generations: {generations} </h2>
-      <button onClick={() => seedGrid(rows, cols)}>Random</button>
-      <button onClick={() => setLine(rows, cols)}>Middle Line</button>
-      <button onClick={() => pause()}>Pause</button>
-      <button onClick={() => clear()}> Clear</button>
-      <button onClick={() => smallGrid()}>Small</button>
-      <button onClick={() => mediumGrid()}>Medium</button>
-      <button onClick={() => largeGrid()}>Large</button>
-      <button onClick={() => speedFast()}>Fast</button>
-      <button onClick={() => speedSlow()}>Slow</button>
-      {grid.length > 0 ? (
-        <button onClick={() => play(grid, rows, cols)}>Resume</button>
-      ) : null}
-      {fullGrid.length > 0
-        ? [
-            <Grid
-              key={1}
-              cols={cols}
-              rows={rows}
-              grid={fullGrid}
-              selectBox={(row, col) => {
-                updateGrid(row, col);
-              }}
-            />,
-          ]
-        : null}
+      <div className="control-pannel">
+        <div className="game-control">
+          {grid.length > 0 ? (
+            <button onClick={() => play(grid, rows, cols)}>Resume</button>
+          ) : null}
+          <button onClick={() => pause()}>Pause</button>
+          <button onClick={() => clear()}> Clear</button>
+        </div>
+
+        <div className="preset-patterns">
+          <button onClick={() => seedGrid(rows, cols)}>Random</button>
+          <button onClick={() => setLine(rows, cols)}>Middle Line</button>
+        </div>
+        <div className="speed-controls">
+          <button onClick={() => speedFast()}>Fast</button>
+          <button onClick={() => speedSlow()}>Slow</button>
+        </div>
+        <div className="grid-size">
+          <button onClick={() => smallGrid()}>Small</button>
+          <button onClick={() => mediumGrid()}>Medium</button>
+          <button onClick={() => largeGrid()}>Large</button>
+        </div>
+      </div>
+      <div className="grid">
+        {fullGrid.length > 0
+          ? [
+              <Grid
+                key={1}
+                cols={cols}
+                rows={rows}
+                grid={fullGrid}
+                selectBox={(row, col) => {
+                  updateGrid(row, col);
+                }}
+              />,
+            ]
+          : null}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,31 @@
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  button {
+    // background-color: transparent;
+    width: 20%;
+    padding: 3%;
+    border: none;
+    cursor: pointer;
+    margin: 1rem 0rem;
+  }
+
+  .control-pannel {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    .game-control,
+    .speed-controls,
+    .preset-patterns,
+    .grid-size {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
